@@ -1,0 +1,8 @@
+.profilePic {
+  border: 1px solid #eee;
+  border-radius: 50%;
+  background-size: cover;
+  background-color: #eee;
+  width: 2rem;
+  height: 2rem;
+}

@@ -1,0 +1,31 @@
+.LandingPage {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  height: 100%;
+}
+
+.mainContent__landing {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mainContent_wrapper {
+  padding: 100px;
+}
+
+.secondaryContent__landing {
+  flex: 1;
+}
+
+.title__landing {
+  margin-bottom: 1rem;
+  font-size: 3rem;
+}
+
+.subtitle__landing {
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}

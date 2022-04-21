@@ -1,0 +1,11 @@
+.EdgeModal {
+  display: flex;
+  flex-direction: column;
+  width: min(600px, 80vw);
+}
+
+.EdgeModal #buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}

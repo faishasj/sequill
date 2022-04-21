@@ -1,0 +1,32 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+}
+
+.content {
+  flex: 1;
+}
+
+.barBtn {
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  margin-left: 1em;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 0.5em;
+  font-size: 1rem;
+}
+
+.profilePic {
+  cursor: pointer;
+  margin-left: 1.5em;
+}
+
+.barBtn:hover {
+  background-color: #eee;
+}

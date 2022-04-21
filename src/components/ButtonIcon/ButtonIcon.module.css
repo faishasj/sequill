@@ -1,0 +1,9 @@
+.iconBtn {
+  cursor: pointer;
+  outline: inherit;
+  border: none;
+  background: none;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+}

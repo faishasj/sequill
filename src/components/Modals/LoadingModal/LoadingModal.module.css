@@ -1,0 +1,32 @@
+.loadingModal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  display: inline-block;
+  margin: 10px 0;
+}
+
+.spinner:after {
+  display: block;
+  animation: spinner 1.2s linear infinite;
+  margin: 8px;
+  border: 6px solid #ccc;
+  border-color: #ccc transparent #ccc transparent;
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  content: " ";
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

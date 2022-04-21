@@ -1,0 +1,34 @@
+.btn {
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.05);
+  border: 0.15em dotted black;
+  border-top-right-radius: 15px 225px;
+  border-top-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-bottom-left-radius: 15px 255px;
+  background-color: white;
+  padding: 0.5em;
+  font-size: 1rem;
+}
+
+.btn:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+.btnContent {
+  flex: 1;
+  margin: 0 2em;
+}
+
+:global .save {
+  width: 10rem;
+  font-weight: bold;
+}
+
+:global .warning {
+  border-color: red;
+  width: 10rem;
+  color: red;
+}

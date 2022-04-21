@@ -1,0 +1,14 @@
+.tableInput select,
+.tableInput input {
+  width: 100%;
+}
+
+.addRowBtn {
+  cursor: pointer;
+  margin: 10px 0 0 5px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}

@@ -1,0 +1,77 @@
+.NodeModal {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin: 1.5rem 0;
+}
+
+.NodeModal .title {
+  margin-bottom: 1rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.NodeModal .section__id {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.NodeModal section {
+  margin-bottom: 0.5rem;
+}
+
+.NodeModal .label__id {
+  margin-right: 5px;
+  font-weight: 600;
+}
+
+.NodeModal .section__input__id {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.NodeModal .input__id {
+  flex: 1;
+  border: 1px solid #555;
+  border-radius: 2px;
+}
+
+.NodeModal .input__id.invalid {
+  border-color: red;
+  color: red;
+}
+
+.NodeModal .text {
+  padding: 0.5rem;
+  width: min(30rem, 80vw);
+  resize: none;
+  font-family: "Playfair Display", serif;
+}
+
+.NodeModal .text:focus {
+  outline: none;
+}
+
+.NodeModal .section__buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.NodeModal .warning {
+  border-color: red;
+  color: red;
+}
+
+.error_message {
+  color: red;
+  font-size: 0.8rem;
+}
+
+.textEditorSection {
+  flex: 1;
+}

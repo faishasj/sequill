@@ -1,0 +1,35 @@
+.contextMenu {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  margin: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 5px;
+  background-color: white;
+  padding: 5px 0px;
+  min-width: 120px;
+  font-size: 0.8rem;
+  list-style-type: none;
+}
+
+.contextMenu > li {
+  -webkit-touch-callout: none; /* iOS Safari */
+  cursor: default;
+  padding: 0.4rem 0.8rem;
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.contextMenu > li:hover {
+  background-color: #eee;
+}
+
+.contextMenu > li.warning {
+  color: red;
+}

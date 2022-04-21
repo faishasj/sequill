@@ -1,0 +1,8 @@
+.conditionTable tr.or {
+  border-top: 5px solid #ccc;
+}
+
+.conditionTable td {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}

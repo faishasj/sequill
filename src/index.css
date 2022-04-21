@@ -1,13 +1,162 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100;200;400&display=swap");
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  margin: 0;
+  color: #333;
+  font-family: "Fira Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+  border-radius: 2px;
+  background-color: #eee;
+  padding: 10px;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+input,
+textarea,
+select,
+button {
+  font-family: "Fira Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+input,
+textarea,
+select {
+  box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid #555;
+  border-radius: 2px;
+  padding: 0.5em;
+  font-size: 1rem;
+}
+
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0Ljk1IDEwIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2ZmZjt9LmNscy0ye2ZpbGw6IzQ0NDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmFycm93czwvdGl0bGU+PHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iNC45NSIgaGVpZ2h0PSIxMCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIxLjQxIDQuNjcgMi40OCAzLjE4IDMuNTQgNC42NyAxLjQxIDQuNjciLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMy41NCA1LjMzIDIuNDggNi44MiAxLjQxIDUuMzMgMy41NCA1LjMzIi8+PC9zdmc+)
+    no-repeat 95% 50%;
+  background-color: #fff;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+}
+
+h1 {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  font-weight: 600;
+  font-size: 1.5rem;
+  font-family: "Playfair Display", serif;
+}
+
+h2 {
+  margin-block-start: 0;
+  margin-block-end: 1rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+h3 {
+  margin-block-start: 0;
+  margin-block-end: 0.3rem;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  border-bottom: 1px solid #333;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-align: left;
+}
+
+td {
+  padding: 5px 2px 0px;
+}
+
+textarea {
+  font-size: 1rem;
+}
+
+.react-flow__node {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  border-top-right-radius: 15px 225px !important;
+  border-top-left-radius: 5px 255px !important;
+  border-bottom-right-radius: 225px 15px !important;
+  border-bottom-left-radius: 15px 255px !important;
+  width: 200px !important;
+  height: 60px !important;
+  font-family: "Playfair Display", serif !important;
+}
+
+.react-flow__node:hover {
+  border-width: 1.5px !important;
+}
+
+.react-flow__node-input {
+  border: 3px double black !important;
+  border-radius: 50% 45% 48% 51% !important;
+  width: 100px !important;
+  height: 95px !important;
+}
+
+.react-flow__node-input:hover {
+  border-width: 4px !important;
+}
+
+.react-flow__node-output {
+  border: 3px double black !important;
+}
+
+.react-flow__node-output:hover {
+  border-width: 4px !important;
+}
+
+.react-flow__edge-text {
+  font-family: "Playfair Display", serif !important;
+}
+
+.react-flow__node-crossroads {
+  border-radius: 0 !important;
+  width: 70px !important;
+  height: 70px !important;
+}
+
+.react-flow__edge-textbg {
+  cursor: pointer !important;
+}
+
+.react-flow__edge-text {
+  font-weight: bold !important;
 }

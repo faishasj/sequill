@@ -1,0 +1,35 @@
+.navBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid #666;
+  padding: 10px 0px;
+  width: 100%;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.siteName {
+  cursor: pointer;
+  margin-left: 30px;
+}
+
+.pageName {
+  cursor: default;
+  margin-left: 30px;
+  font-weight: 300;
+  font-size: 1.2rem;
+}
+
+.children {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 60px;
+}

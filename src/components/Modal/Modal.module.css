@@ -1,0 +1,37 @@
+.modalBackground {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  background: rgba(150, 150, 150, 0.7);
+}
+
+.modal {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.05);
+  border: 1px solid #eee;
+  border-radius: 0.8rem;
+  background-color: #ffffff;
+  padding: 1rem;
+  max-width: 80vw;
+  max-height: 100%;
+  overflow-y: scroll;
+}
+
+.topBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.barButton {
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}

@@ -18,7 +18,7 @@ import {
   faShapes,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { newNode, newCrossroads } from "types/Node";
+import { newNode, newCrossroads, NodeType } from "types/Node";
 import { newEdge, textToButton, buttonToText } from "types/Edge";
 import { newVariable } from "types/Variable";
 import NodeModal from "./Modals/NodeModal";
@@ -53,12 +53,67 @@ const GraphEditor = ({
 }) => {
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
+  const [nodeConnecting, setNodeConnecting] = useState(null);
   const [nodeSelected, setNodeSelected] = useState(null);
   const [edgeSelected, setEdgeSelected] = useState(null);
   const [nodeContext, setNodeContext] = useState(null);
   const [edgeContext, setEdgeContext] = useState(null);
   const [paneContext, setPaneContext] = useState(null);
   const [editVariables, setEditVariables] = useState(false);
+  const sourceNode = useRef(null);
+
+  const getNewNode = useCallback(
+    (type, { x, y }) => {
+      const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
+      const position = reactFlowInstance.project({
+        x: x - reactFlowBounds.left,
+        y: y - reactFlowBounds.top,
+      });
+      const node =
+        type === NodeType.CROSSROADS ? newCrossroads() : newNode(type);
+      return {
+        ...node,
+        ...(type !== NodeType.CROSSROADS && {
+          data: {
+            ...node.data,
+            pathType: settings.defaultPath,
+            ignoreCapitalisation: settings.ignoreCapitalisation,
+            ignoreArticles: settings.ignoreArticles,
+            ignorePunctuation: settings.ignorePunctuation,
+          },
+        }),
+        position: {
+          x: position.x - (type === NodeType.CROSSROADS ? 35 : 100),
+          y: position.y,
+        },
+      };
+    },
+    [reactFlowInstance, settings]
+  );
+
+  const getNewEdges = useCallback(
+    ({ source, target }) => {
+      const sourceNode = reactFlowInstance.getNode(source);
+      const edge = newEdge(sourceNode.data.pathType);
+      return addEdge(
+        {
+          ...edge,
+          ...(sourceNode.data.pathType === "condition" &&
+            edges.filter((e) => e.source === source).length > 0 && {
+              label: "0 conditions",
+              data: {
+                ...edge.data,
+                isDefault: false,
+              },
+            }),
+          source: source,
+          target: target,
+        },
+        edges
+      );
+    },
+    [edges, reactFlowInstance]
+  );
 
   const onNodeContextMenu = useCallback((event, node) => {
     event.preventDefault();
@@ -73,33 +128,6 @@ const GraphEditor = ({
     setNodeContext(null);
     setPaneContext(null);
   }, []);
-
-  const onConnect = useCallback(
-    (connection) => {
-      const source = reactFlowInstance.getNode(connection.source);
-      const edge = newEdge(source.data.pathType);
-      applyChanges({
-        edges: addEdge(
-          {
-            ...edge,
-            ...(source.data.pathType === "condition" &&
-              edges.filter((e) => e.source === connection.source).length >
-                0 && {
-                label: "0 conditions",
-                data: {
-                  ...edge.data,
-                  isDefault: false,
-                },
-              }),
-            source: connection.source,
-            target: connection.target,
-          } as FlowEdge,
-          edges
-        ),
-      });
-    },
-    [applyChanges, edges, reactFlowInstance]
-  );
 
   const onPaneClick = useCallback((event) => {
     setNodeContext(null);
@@ -132,33 +160,13 @@ const GraphEditor = ({
   );
 
   const addNode = useCallback(
-    (type) => {
-      const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
-      const node = type === "crossroads" ? newCrossroads() : newNode(type);
+    (type, { x, y }) => {
       applyChanges({
-        nodes: [
-          ...nodes,
-          {
-            ...node,
-            ...(type !== "crossroads" && {
-              data: {
-                ...node.data,
-                pathType: settings.defaultPath,
-                ignoreCapitalisation: settings.ignoreCapitalisation,
-                ignoreArticles: settings.ignoreArticles,
-                ignorePunctuation: settings.ignorePunctuation,
-              },
-            }),
-            position: reactFlowInstance.project({
-              x: paneContext.x - reactFlowBounds.left,
-              y: paneContext.y - reactFlowBounds.top,
-            }),
-          },
-        ],
+        nodes: [...nodes, getNewNode(type, { x, y })],
       });
       setPaneContext(null);
     },
-    [applyChanges, nodes, settings, paneContext, reactFlowInstance]
+    [applyChanges, nodes, getNewNode]
   );
 
   const saveNode = useCallback(
@@ -362,6 +370,50 @@ const GraphEditor = ({
     setEditVariables(false);
   }, [applyChanges, variables]);
 
+  const onConnectStart = useCallback((e, { nodeId, handleType }) => {
+    sourceNode.current = { id: nodeId, handleType: handleType };
+  }, []);
+
+  const onConnect = useCallback(
+    (connection) => {
+      applyChanges({
+        edges: getNewEdges(connection),
+      });
+    },
+    [applyChanges, getNewEdges]
+  );
+
+  const onConnectEnd = useCallback(
+    (e) => {
+      const element = document.elementFromPoint(e.clientX, e.clientY);
+      if (element.classList.contains("react-flow__pane")) {
+        const target = getNewNode(NodeType.MIDDLE, {
+          x: e.clientX,
+          y: e.clientY,
+        });
+        applyChanges({
+          nodes: [...nodes, target],
+          edges: getNewEdges({
+            source: sourceNode.current.id,
+            target: target.id,
+          }),
+        });
+      } else if (
+        element.classList.contains("react-flow__node") &&
+        element.querySelector(".target")
+      ) {
+        applyChanges({
+          edges: getNewEdges({
+            source: sourceNode.current.id,
+            target: element.getAttribute("data-id"),
+          }),
+        });
+      }
+      setNodeConnecting(null);
+    },
+    [applyChanges, nodes, getNewNode, getNewEdges]
+  );
+
   return (
     <div className={"GraphEditor"} ref={reactFlowWrapper}>
       <ReactFlow
@@ -380,12 +432,15 @@ const GraphEditor = ({
         onNodeContextMenu={onNodeContextMenu}
         onEdgeContextMenu={onEdgeContextMenu}
         onConnect={onConnect}
+        onConnectStart={onConnectStart}
+        onConnectEnd={onConnectEnd}
         onPaneClick={onPaneClick}
         onPaneContextMenu={onPaneContextMenu}
         defaultEdgeOptions={defaultEdgeOptions}
         panOnDrag={!(nodeContext || edgeContext || paneContext)}
         zoomOnPinch={!(nodeContext || edgeContext || paneContext)}
         zoomOnScroll={!(nodeContext || edgeContext || paneContext)}
+        elementsSelectable={false}
         fitView
       >
         <Controls />
@@ -479,9 +534,21 @@ const GraphEditor = ({
             x={paneContext.x}
             y={paneContext.y}
             options={[
-              { name: "Add middle node", action: () => addNode("default") },
-              { name: "Add end node", action: () => addNode("output") },
-              { name: "Add crossroads", action: () => addNode("crossroads") },
+              {
+                name: "Add middle node",
+                action: () =>
+                  addNode("default", { x: paneContext.x, y: paneContext.y }),
+              },
+              {
+                name: "Add end node",
+                action: () =>
+                  addNode("output", { x: paneContext.x, y: paneContext.y }),
+              },
+              {
+                name: "Add crossroads",
+                action: () =>
+                  addNode("crossroads", { x: paneContext.x, y: paneContext.y }),
+              },
             ]}
           />
         )}

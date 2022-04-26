@@ -1,0 +1,63 @@
+.storyModal {
+  margin: 10px 100px;
+  width: min(850px, 80vw);
+}
+
+.storyModalContainer {
+  display: flex;
+}
+
+.storySettings,
+.editorSettings {
+  padding: 10px;
+}
+
+.storySettings {
+  flex: 3;
+}
+
+.editorSettings {
+  flex: 1;
+}
+
+.inputHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.inputHeading {
+  flex: 1;
+  font-weight: 600;
+}
+
+.inputHint {
+  font-size: 0.8rem;
+  text-align: right;
+}
+
+.storyModal input,
+.storyModal select,
+.storyModal textarea {
+  margin-bottom: 1.5rem;
+}
+
+.listInput {
+  margin-bottom: 1.5rem;
+}
+
+.listInput input {
+  margin-bottom: 0;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.checkbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

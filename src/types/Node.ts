@@ -2,12 +2,12 @@ import { EdgeType } from "./Edge";
 
 import { v4 as uuidv4 } from "uuid";
 
-export type START_NODE = "input";
-export type MIDDLE_NODE = "default";
-export type END_NODE = "output";
-export type CROSSROADS_NODE = "crossroads";
-
-export type NodeType = START_NODE | MIDDLE_NODE | END_NODE | CROSSROADS_NODE;
+export const enum NodeType {
+  START = "input",
+  MIDDLE = "default",
+  END = "output",
+  CROSSROADS = "crossroads",
+}
 
 interface Node {
   id: string;
@@ -29,7 +29,10 @@ interface Node {
 
 export default Node;
 
-export const newNode = (type: NodeType, pathType: EdgeType = "text"): Node => ({
+export const newNode = (
+  type: NodeType,
+  pathType: EdgeType = EdgeType.TEXT
+): Node => ({
   id: uuidv4(),
   type: type,
   data: {
@@ -52,9 +55,9 @@ export const newNode = (type: NodeType, pathType: EdgeType = "text"): Node => ({
 
 export const newCrossroads = (): Node => ({
   id: uuidv4(),
-  type: "crossroads",
+  type: NodeType.CROSSROADS,
   data: {
-    pathType: "condition",
+    pathType: EdgeType.CONDITION,
     label: "",
   },
   position: {

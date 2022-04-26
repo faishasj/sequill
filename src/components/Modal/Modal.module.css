@@ -27,6 +27,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: baseline;
 }
 
 .barButton {
@@ -34,4 +35,22 @@
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.save {
+  border-color: white;
+  background-color: #dc267f;
+  width: 10rem;
+  color: white;
+  font-weight: bold;
+}
+
+.cancel {
+  width: 10rem;
 }

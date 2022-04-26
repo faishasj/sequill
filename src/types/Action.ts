@@ -1,11 +1,32 @@
 import { v4 as uuidv4 } from "uuid";
 
-import Variable, { VariableType } from "./Variable";
+import Variable, { VarType } from "./Variable";
 
-export type TextAction = "Set" | "Append";
-export type NumberAction = "Set" | "Add" | "Subtract" | "Multiply" | "Divide";
-export type BooleanAction = "Set" | "Not" | "And" | "Or";
-export type ListAction = "Set" | "Append" | "Remove";
+export const enum TextAction {
+  SET = "Set",
+  APPEND = "Append",
+}
+
+export const enum NumberAction {
+  SET = "Set",
+  ADD = "Add",
+  SUBTRACT = "Subtract",
+  MULTIPLY = "Multiply",
+  DIVIDE = "Divide",
+}
+
+export const enum BooleanAction {
+  SET = "Set",
+  NOT = "Not",
+  AND = "And",
+  OR = "Or",
+}
+
+export const enum ListAction {
+  SET = "Set",
+  APPEND = "Append",
+  REMOVE = "Remove",
+}
 
 export type ActionType = TextAction | NumberAction | BooleanAction | ListAction;
 
@@ -18,46 +39,57 @@ interface Action {
 
 export default Action;
 
-export const getActions = (variableType: VariableType): ActionType[] => {
-  switch (variableType) {
-    case "Text":
-      return ["Set", "Append"];
-    case "Number":
-      return ["Set", "Add", "Subtract", "Multiply", "Divide"];
-    case "Boolean":
-      return ["Set", "Not", "And", "Or"];
-    case "List":
-      return ["Set", "Append", "Remove"];
+export const getActions = (varType: VarType): ActionType[] => {
+  switch (varType) {
+    case VarType.TEXT:
+      return [TextAction.SET, TextAction.APPEND];
+    case VarType.NUMBER:
+      return [
+        NumberAction.SET,
+        NumberAction.ADD,
+        NumberAction.SUBTRACT,
+        NumberAction.MULTIPLY,
+        NumberAction.DIVIDE,
+      ];
+    case VarType.BOOLEAN:
+      return [
+        BooleanAction.SET,
+        BooleanAction.NOT,
+        BooleanAction.AND,
+        BooleanAction.OR,
+      ];
+    case VarType.LIST:
+      return [ListAction.SET, ListAction.APPEND, ListAction.REMOVE];
   }
 };
 
-export const getNewAction = (variable: Variable): Action => {
+export const newAction = (variable: Variable): Action => {
   switch (variable.type) {
-    case "Text":
+    case VarType.TEXT:
       return {
         id: uuidv4(),
-        action: "Set",
+        action: TextAction.SET,
         variable: variable.id,
         value: "",
       };
-    case "Number":
+    case VarType.NUMBER:
       return {
         id: uuidv4(),
-        action: "Set",
+        action: NumberAction.SET,
         variable: variable.id,
         value: 0,
       };
-    case "Boolean":
+    case VarType.BOOLEAN:
       return {
         id: uuidv4(),
-        action: "Set",
+        action: BooleanAction.SET,
         variable: variable.id,
         value: true,
       };
-    case "List":
+    case VarType.LIST:
       return {
         id: uuidv4(),
-        action: "Set",
+        action: ListAction.SET,
         variable: variable.id,
         value: [],
       };

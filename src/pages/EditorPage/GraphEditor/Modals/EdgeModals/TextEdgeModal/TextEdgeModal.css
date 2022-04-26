@@ -1,0 +1,52 @@
+.TextEdgeModal section#actions {
+  margin-bottom: 2rem;
+}
+
+.TextEdgeModal .trigger {
+  display: flex;
+  flex-direction: row;
+}
+
+.TextEdgeModal .delete {
+  cursor: pointer;
+  padding-left: 10px;
+  font-weight: 700;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+.TextEdgeModal .section__options {
+  font-size: 0.8rem;
+}
+
+.TextEdgeModal .option {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.TextEdgeModal .action {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.TextEdgeModal #variable_value {
+  width: 100px;
+}
+
+.text_button {
+  cursor: pointer;
+  padding: 5px 0px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+.trigger {
+  display: flex;
+  align-items: baseline;
+}

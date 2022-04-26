@@ -21,14 +21,3 @@
   flex: 1;
   margin: 0 2em;
 }
-
-:global .save {
-  width: 10rem;
-  font-weight: bold;
-}
-
-:global .warning {
-  border-color: red;
-  width: 10rem;
-  color: red;
-}

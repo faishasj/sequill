@@ -1,61 +1,39 @@
 import { v4 as uuidv4 } from "uuid";
+import { Edge as FlowEdge } from "react-flow-renderer";
 
 import Action from "./Action";
+import Condition from "./Condition";
 
-export type TEXT_EDGE = "text";
-export type BUTTON_EDGE = "button";
-export type CONDITION_EDGE = "condition";
-
-export type EdgeType = TEXT_EDGE | BUTTON_EDGE | CONDITION_EDGE;
-
-export interface TextEdge {
-  id: string;
-  source: string;
-  target: string;
-  label: string;
-  labelStyle: { fill: string };
-  labelBgPadding: number[];
-  labelBgBorderRadius: number;
-  labelBgStyle: { fill: string; fillOpacity: number };
-  data: {
-    type: TEXT_EDGE;
-    triggers: string[];
-    actions: Action[];
-  };
+export const enum EdgeType {
+  TEXT = "text",
+  BUTTON = "button",
+  CONDITION = "condition",
 }
 
-export interface ButtonEdge {
-  id: string;
-  source: string;
-  target: string;
-  label: string;
-  labelStyle: { fill: string };
-  labelBgPadding: number[];
-  labelBgBorderRadius: number;
-  labelBgStyle: { fill: string; fillOpacity: number };
-  data: {
-    type: BUTTON_EDGE;
-    name: string;
-    actions: Action[];
-  };
+export interface TextEdgeData {
+  type: EdgeType.TEXT;
+  triggers: string[];
+  actions: Action[];
 }
 
-export interface ConditionEdge {
-  id: string;
-  source: string;
-  target: string;
-  label: string;
-  labelStyle: { fill: string };
-  labelBgPadding: number[];
-  labelBgBorderRadius: number;
-  labelBgStyle: { fill: string; fillOpacity: number };
-  data: {
-    type: CONDITION_EDGE;
-    conditions: string[];
-    actions: Action[];
-    isDefault: boolean;
-  };
+export type TextEdge = FlowEdge<TextEdgeData>;
+
+export interface ButtonEdgeData {
+  type: EdgeType.BUTTON;
+  name: string;
+  actions: Action[];
 }
+
+export type ButtonEdge = FlowEdge<ButtonEdgeData>;
+
+export interface ConditionEdgeData {
+  type: EdgeType.CONDITION;
+  conditions: Condition[];
+  actions: Action[];
+  isDefault: boolean;
+}
+
+export type ConditionEdge = FlowEdge<ConditionEdgeData>;
 
 type Edge = TextEdge | ButtonEdge | ConditionEdge;
 
@@ -64,19 +42,19 @@ export default Edge;
 export const EdgeStyles = {
   text: {
     labelStyle: { fill: "#fff" },
-    labelBgPadding: [8, 4],
+    labelBgPadding: [8, 4] as [number, number],
     labelBgBorderRadius: 10,
     labelBgStyle: { fill: "#648FFF", fillOpacity: 0.9 },
   },
   button: {
     labelStyle: { fill: "#fff" },
-    labelBgPadding: [8, 4],
+    labelBgPadding: [8, 4] as [number, number],
     labelBgBorderRadius: 2,
     labelBgStyle: { fill: "#DC267F", fillOpacity: 0.9 },
   },
   condition: {
     labelStyle: { fill: "#000" },
-    labelBgPadding: [8, 4],
+    labelBgPadding: [8, 4] as [number, number],
     labelBgBorderRadius: 10,
     labelBgStyle: { fill: "#FFB000", fillOpacity: 0.9 },
   },
@@ -88,7 +66,7 @@ export const newTextEdge = (): TextEdge => ({
   target: "",
   label: "...",
   data: {
-    type: "text",
+    type: EdgeType.TEXT,
     triggers: [""],
     actions: [],
   },
@@ -101,7 +79,7 @@ export const newButtonEdge = (): ButtonEdge => ({
   target: "",
   label: "Button",
   data: {
-    type: "button",
+    type: EdgeType.BUTTON,
     name: "Button",
     actions: [],
   },
@@ -114,7 +92,7 @@ export const newConditionalEdge = (): ConditionEdge => ({
   target: "",
   label: "DEFAULT",
   data: {
-    type: "condition",
+    type: EdgeType.CONDITION,
     conditions: [],
     actions: [],
     isDefault: true,
@@ -135,7 +113,7 @@ export const textToButton = (textEdge: TextEdge): ButtonEdge => ({
   data: {
     ...textEdge.data,
     name: textEdge.data.triggers[0] || "Button",
-    type: "button",
+    type: EdgeType.BUTTON,
   },
   ...EdgeStyles.button,
 });
@@ -145,7 +123,7 @@ export const buttonToText = (buttonEdge: ButtonEdge): TextEdge => ({
   label: buttonEdge.data.name,
   data: {
     ...buttonEdge.data,
-    type: "text",
+    type: EdgeType.TEXT,
     triggers: [buttonEdge.data.name],
   },
   ...EdgeStyles.text,

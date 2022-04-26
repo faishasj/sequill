@@ -1,37 +1,37 @@
 import { v4 as uuidv4 } from "uuid";
 
-export type TEXT_VAR = "Text";
-export type NUMBER_VAR = "Number";
-export type BOOLEAN_VAR = "Boolean";
-export type LIST_VAR = "List";
-
-export type VariableType = TEXT_VAR | NUMBER_VAR | BOOLEAN_VAR | LIST_VAR;
+export const enum VarType {
+  TEXT = "Text",
+  NUMBER = "Number",
+  BOOLEAN = "Boolean",
+  LIST = "List",
+}
 
 export interface TextVariable {
   id: string;
   name: string;
-  type: TEXT_VAR;
+  type: VarType.TEXT;
   initialValue: string;
 }
 
 export interface NumberVariable {
   id: string;
   name: string;
-  type: NUMBER_VAR;
+  type: VarType.NUMBER;
   initialValue: number;
 }
 
 export interface BooleanVariable {
   id: string;
   name: string;
-  type: BOOLEAN_VAR;
+  type: VarType.BOOLEAN;
   initialValue: boolean;
 }
 
 export interface ListVariable {
   id: string;
   name: string;
-  type: LIST_VAR;
+  type: VarType.LIST;
   initialValue: string[];
 }
 
@@ -42,6 +42,6 @@ export default Variable;
 export const newVariable = (): Variable => ({
   id: uuidv4(),
   name: "",
-  type: "Text",
+  type: VarType.TEXT,
   initialValue: "",
 });

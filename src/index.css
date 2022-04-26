@@ -160,3 +160,6 @@ textarea {
 .react-flow__edge-text {
   font-weight: bold !important;
 }
+
+.react-flow__node.selected {
+}

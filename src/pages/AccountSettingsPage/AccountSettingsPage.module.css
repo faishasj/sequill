@@ -34,9 +34,21 @@
   display: flex;
   flex: 1;
   flex-direction: row;
+  align-items: baseline;
   margin: 0.2rem 0;
 }
 
 .field > label {
   width: 6rem;
+}
+
+.saveBtn {
+  margin-bottom: 20px;
+  width: 12rem;
+}
+
+.signOutBtn {
+  border-color: red;
+  width: 12rem;
+  color: red;
 }
